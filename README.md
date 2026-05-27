@@ -1,33 +1,44 @@
-# Cooking Recipes Platform
+# Cooking Recipes Platform (Flask MVC)
 
-A full-stack web application designed for culinary enthusiasts to create, share, and discover cooking recipes. This project demonstrates backend architecture, relational database management, and secure user authentication.
+A full-stack web application that allows users to discover, share, and manage cooking recipes, built with a robust MVC (Model-View-Controller) architecture.
 
-## Features
+## 🎯 Objective
+The objective of this project was to build a secure, dynamic web platform from scratch. It focuses on back-end routing, database management, user authentication, and serving dynamic front-end content using a structured MVC design pattern.
 
-- **User Authentication:** Secure signup, login, and session management.
-- **Recipe Management:** Users can perform CRUD (Create, Read, Update, Delete) operations on their own recipes.
-- **Social Interaction:** Browse recipes created by other users and explore a shared culinary feed.
-- **Search Functionality:** Filter and search recipes by title, ingredients, or author.
+## 🚀 What is Achieved
+- **MVC Architecture:** Separated the application logic using Flask Blueprints. The Models handle database interactions, Views manage the HTML templates, and Controllers process the business logic and routing.
+- **User Authentication:** Implemented a secure user registration and login system, utilizing session management to restrict access to specific routes (e.g., creating or deleting recipes).
+- **Relational Database:** Designed a SQL database to store users, recipes, ingredients, and categories, establishing proper foreign key relationships.
+- **Dynamic Templating:** Utilized Jinja2 to render dynamic HTML pages, injecting database content directly into the front-end securely.
 
-## Tech Stack & Architecture
+## 🛠️ Tools & Technologies
+- **Back-End:** Python, Flask, Flask-SQLAlchemy, Flask-Login.
+- **Front-End:** HTML5, CSS3, Jinja2 Templating.
+- **Database:** SQLite / MySQL.
+- **Architecture:** Model-View-Controller (MVC).
 
-- **Backend Framework:** Flask (Python) using a Blueprint architecture to cleanly separate Authentication and Main application logic.
-- **Database:** SQLAlchemy ORM interacting with a MySQL relational database.
-- **Security:** Flask-Bcrypt for password hashing and Flask-Login for secure session handling and user loading.
-- **Frontend:** HTML5, CSS3, and Jinja2 templating engine for dynamic content rendering.
+## 📖 Usage Guide
 
-## Project Structure
+### Prerequisites
+Ensure you have Python 3 installed. It is highly recommended to use a virtual environment.
 
-The codebase is organized into modular blueprints:
-- `/recipes/auth.py`: Handles registration, login, and password hashing logic.
-- `/recipes/main.py`: Manages the core feed, recipe creation, and search functionalities.
-- `/recipes/model.py`: Defines the SQLAlchemy database schemas for `User` and `Recipe` entities.
+```bash
+pip install flask flask-sqlalchemy flask-login
+```
 
-## How to Run
-
-1. Create a virtual environment and install the dependencies (if a requirements file is present, use `pip install -r requirements.txt`).
-2. Set the required environment variables for the database connection (`DATABASE_URL`) and application secret (`FLASK_SECRET_KEY`).
-3. Run the Flask development server:
+### Running the Server
+1. Clone the repository.
+2. Navigate to the project root directory.
+3. Initialize the database (if necessary):
    ```bash
-   flask --app recipes run --debug
+   flask db init
+   flask db migrate
+   flask db upgrade
    ```
+4. Start the Flask development server:
+   ```bash
+   python run.py
+   # or
+   flask run
+   ```
+5. Open your web browser and navigate to `http://127.0.0.1:5000`.
