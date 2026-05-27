@@ -1,0 +1,201 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="recipe-container">
+        <h2>{{ recipe.title }}</h2>
+        <form  action="{{ url_for('main.bookmark', recipe_id=recipe.id)}}" method="post">
+            <div>
+                {% set vars = {'is_found': False} %}
+        
+                {% for i in range(current_user.bookmarks|length) %}
+                    {% if current_user.bookmarks[i].recipe_id == recipe.id %}
+                        {% if vars.update({'is_found':True}) %} {% endif %}
+                    {% endif %}
+                {% endfor %}
+        
+                {% if vars.is_found %}
+                    <button id="delete_recipe" class="bookmarked">
+                        <i class="fas fa-bookmark"></i>
+                    </button>
+                {% else %}
+                    <button id="save_recipe">
+                        <i class="fas fa-bookmark"></i>
+                    </button>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+    <div class = "delete_btn">
+        {% if current_user.id == author.id %} 
+            <form class="delete-form" action="{{ url_for('main.delete', recipe_id = recipe.id)}}" method="post">
+            <input type="hidden" name="recipe_id" value ="{{recipe.id}}" >
+                <div class = "delete">
+                    <button type="submit">Delete</button>
+                </div>
+            </form>
+        {%endif%} 
+    </div>
+
+    <div class = "index_recipe">General information</div>
+        <section class = "general_info_recipe">
+            <p><b>Author: </b> <a href="{{url_for('main.user', user_id = author.id)}}">{{author.username}}</a></p>
+            <p><b>Date: </b>{{ recipe.timestamp }}</p>
+            <p><b>Description: </b>{{ recipe.description }}</p>
+            <p><b>Cooking Time: </b>{{ recipe.cooking_time }} minutes</p>
+            <p><b>Servings: </b>{{ recipe.servings }}</p>
+        </section>
+    </div>
+
+    <p class = "index_recipe">Photos from the author and the users</p>
+
+    <div class="gallery-wrap">
+        <img src="{{url_for('static', filename='photos/back.png')}}" id="left_arrow">
+        <div class="gallery">
+            
+                {% for photo in recipe.photos  %}
+                    <div>
+                    <span><img src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="photo"></span>
+                    </div>
+                {% endfor %}
+            
+        </div>
+        <img src="{{url_for('static', filename='photos/next.png')}}" id="right_arrow">
+    </div>
+    
+    <script>
+        let scrollContainer = document.querySelector(".gallery");
+        let left_arrow = document.getElementById("left_arrow");
+        let right_arrow = document.getElementById("right_arrow");
+    
+        let containerWidth = scrollContainer.offsetWidth;
+    
+        scrollContainer.addEventListener("wheel", (evt) => {
+            evt.preventDefault();
+            const scrollAmount = evt.deltaY * 2; //
+            scrollContainer.scrollLeft += scrollAmount;
+            scrollContainer.style.scrollBehavior = "auto";
+        });
+    
+        left_arrow.addEventListener("click", () => {
+            scrollContainer.style.scrollBehavior = "smooth";
+            scrollContainer.scrollLeft -= containerWidth;
+        });
+    
+        right_arrow.addEventListener("click", () => {
+            scrollContainer.style.scrollBehavior = "smooth";
+            scrollContainer.scrollLeft += containerWidth;
+        });
+    </script>
+    
+
+    <div class = "index_recipe">Ingredients</div>
+    <section class= "ingredients-recipe">
+        <p>
+            {% for ingredient in recipe.ingredients%}
+                <div>
+                    <input type="checkbox" class="ingredient-checkbox" id="{{ ingredient.ingredient.id }}">
+                    {{ingredient.ingredient.name}} {{ingredient.quantity}} {{ingredient.unit}} 
+                </div>
+            {%endfor%} 
+        </p>
+    </section>
+
+
+    <div class = "index_recipe">Steps</div>
+    <section class = "steps-recipe">
+        <p> 
+            {% for step in recipe.steps%}
+                <div>
+                    {{step.sequence_number}}: {{step.description}} 
+                </div>
+            {%endfor%} 
+        </p>
+    </section>
+
+
+    <div class="voting">
+        <form id="likeForm" action="{{ url_for('main.rating_like')}}" method="post">
+            <button id="likebtn">
+                <i class="fa fa-thumbs-up"></i>
+            </button>
+            <span id = 'rating'>
+                {{ total_likes }}
+            </span>
+            <input type="hidden" name="recipe_id" value="{{recipe.id}}">
+        </form>
+    
+        <span>
+            <form id="dislikeForm" action="{{ url_for('main.rating_dislike')}}" method="post">
+                <button id="dislikebtn">
+                    <i class="fa fa-thumbs-down"></i>
+                </button>
+                <span id = 'rating'>
+
+                    {{ total_dislikes }}
+                    </span>
+                <input type="hidden" name="recipe_id" value="{{recipe.id}}">
+            </form>
+        </span>
+    </div>
+
+
+    
+    
+    <div class = "turn">
+        <h2>Now... it's your turn!</h2>
+    </div>
+    <section class="picture-recipe">
+        <h3 class="upload_photo"> Show the author how your creation looks!</h3>
+        <form class="picture-form" action= "{{ url_for('main.photo', recipe_id = recipe.id)}}" method="post" enctype="multipart/form-data">
+            <input type="file" name="photo" accept="image/jpeg,image/png" required>
+            <input type="hidden" name="recipe_id" value="{{recipe.id}}">
+
+            <div class="btngeneral">
+                <button type="submit">Add picture</button>
+            </div>                
+        </form>
+
+    </section>
+    
+
+    
+    <section class ="comments-recipe">
+        <!-- Add a form for posting comments on the user's recipes -->
+        <h3>Post a Comment on the Recipe</h3>
+        <form action="{{ url_for('main.new_comment_on_recipe') }}" method="post">
+            <input type="hidden" name="user_id" value="{{ current_user.id }}">
+            <input type="hidden" name="recipe_id" value ="{{recipe.id}}" >
+            <textarea name="text" placeholder="Your comment..." required></textarea>
+            <span class="btngeneral"><button type="submit">Post Comment</button></span>
+        </form>        
+    </section>
+
+
+    <section class="comment-section">
+        <h3>Latest comments </h3>
+        <div class="comments">
+            {% for comment in comments %}
+                <div class="recipe">
+                    <p>Author: <a href="{{url_for('main.user', user_id = comment.user.id)}}">{{comment.user.username}}</a></p>
+                        
+                    <div class="original" data-comment-id="{{ comment.id }}" data-current-user-id="{{ current_user.id }}">
+                        <li>{{ comment.text }}</li>
+                    </div>
+                    
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+
+
+
+    <div id="recipe-data" data-url="{{ url_for('main.new_comment_on_comment') }}" data-recipe-id="{{ recipe.id }}"></div>
+    <script>
+        var formAction = "{{ url_for('main.new_comment_on_comment') }}";
+        var base_url = "{{ url_for('main.new_comment_on_comment') }}";
+    </script>
+
+
+{% endblock %}
+
+   

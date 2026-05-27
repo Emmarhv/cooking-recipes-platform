@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="profile">
+    <div class="user_info">
+        <h2 class="author_name">{{ user.username }}</h2>
+    </div>
+
+    <div class="follow-input">
+        {% if follow_button == "follow" %}
+            <form action="{{ url_for('main.follow', user_id=user.id) }}" method="post">
+                <input type="submit" value="Follow">
+            </form>
+        {% elif follow_button == "unfollow" %}
+            <form action="{{ url_for('main.unfollow', user_id=user.id) }}" method="post">
+                <input type="submit" value="Unfollow">
+            </form>
+        {% endif %}
+    </div>
+    
+    <div class="two-columns">
+        <!-- Add a section to display the user's recipes -->
+        <div class="left-column">
+            <section class = "my-recipes">
+                <h2>Recipes</h2>
+                {% for recipe in recipes %}
+                    <div>
+                        <li><a href="{{ url_for('main.recipe', recipe_id=recipe.id) }}">{{ recipe.title }}</a></li>               
+                    </div>
+                {% endfor %}
+            </section>
+
+            <!--Bookmarked recipes-->
+            {%if user.id == current_user.id %}
+                <section class = "bookmarked-recipes">
+                    <h2> Bookmarked recipes</h2>
+                        {% for bookmark in current_user.bookmarks %} 
+                            <li><a href="{{ url_for('main.recipe', recipe_id=bookmark.recipe_id) }}">{{ bookmark.recipe.title }}</a></li>                
+                        {%endfor%} 
+                </section>
+            {%endif%}  
+        </div>
+
+
+
+        <div class="right-column">
+            <section class = "following">
+                <h2>Following</h2>
+                    {% for followed_user in user.following %}
+                    <form id="dislikeForm" action="{{ url_for('main.user', user_id=followed_user.id) }}" method="post">
+                        <button id="personbtn">
+                            <i class="fas fa-user"></i>
+                        </button>
+    
+    
+                        <span class = "follows">
+                            <a href="{{ url_for('main.user', user_id=followed_user.id) }}">{{ followed_user.username }}</a>
+                        </span>
+                        
+                    </form>                    
+                    {% endfor %}
+            </section>
+
+            <section class = "followers">
+                <h2>Followers</h2>
+                {% for follower_user in user.followers %}
+
+                <form id="dislikeForm" action="{{ url_for('main.user', user_id=follower_user.id) }}" method="post">
+                    <button id="personbtn">
+                        <i class="fas fa-user"></i>
+                    </button>
+
+
+                    <span class = "follows">
+                        <a href="{{ url_for('main.user', user_id=follower_user.id) }}">{{ follower_user.username }}</a>
+                    </span>
+                    
+                </form>
+
+                {% endfor %}
+            
+            </section>    
+        </div>
+    </div>
+
+    <section class = "my-photos">
+        <h2>Gallery</h2>
+        <div class="gallery-wrap">
+            <img src="{{url_for('static', filename='photos/back.png')}}" id="left_arrow">
+            <div class="gallery">
+                
+                    {% for photo in photos  %}
+                        <div>
+                        <span><img src="{{ url_for('static', filename='photos/photo-' ~ photo.id ~ '.' ~ photo.file_extension) }}" alt="photo"></span>
+                        </div>
+                    {% endfor %}
+            
+            </div>
+            <img src="{{url_for('static', filename='photos/next.png')}}" id="right_arrow">
+        </div>
+        
+        <script>
+            let scrollContainer = document.querySelector(".gallery");
+            let left_arrow = document.getElementById("left_arrow");
+            let right_arrow = document.getElementById("right_arrow");
+        
+            let containerWidth = scrollContainer.offsetWidth;
+        
+            scrollContainer.addEventListener("wheel", (evt) => {
+                evt.preventDefault();
+                const scrollAmount = evt.deltaY * 2; //
+                scrollContainer.scrollLeft += scrollAmount;
+                scrollContainer.style.scrollBehavior = "auto";
+            });
+        
+            left_arrow.addEventListener("click", () => {
+                scrollContainer.style.scrollBehavior = "smooth";
+                scrollContainer.scrollLeft -= containerWidth;
+            });
+        
+            right_arrow.addEventListener("click", () => {
+                scrollContainer.style.scrollBehavior = "smooth";
+                scrollContainer.scrollLeft += containerWidth;
+            });
+        </script>
+        </section>  
+{% endblock %}

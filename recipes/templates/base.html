@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+   <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>COOKING RECIPES</title>
+        
+        <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">            
+        <link rel="stylesheet" href=" https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"> 
+        <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Work+Sans:400,700&display=swap">
+
+  
+   </head>
+    <body>
+        <header>
+            <div class= "logging">
+                {% if current_user.is_authenticated %}
+                    <div>User: {{ current_user.username }}</div>
+                    <a href="{{ url_for('main.user', user_id=current_user.id) }}">My Profile</a>
+                    <br> <!--Line break--> 
+                    <a href="{{ url_for('auth.logout') }}">Logout</a>
+                {% else %} 
+                    <a href="{{ url_for('auth.login') }}">Login</a>
+                {% endif %}
+            </div>
+            <div class = "header-middle">
+                <img src="/static/logo.png" alt="Logo">
+                <h1>COOKING RECIPES</h1>
+                
+                <div><a href="{{ url_for('main.index') }}">Home</a></div>
+            </div>
+           
+        </header>
+    
+       <section class="content">
+           {% block content %}{% endblock %}
+       </section>
+       <footer><small>Developed for Web applications</small></footer>
+
+       <script
+       src="https://code.jquery.com/jquery-3.7.1.min.js"
+       integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+       crossorigin="anonymous"></script>
+       <script src="{{ url_for('static', filename='main.js') }}"></script>
+       
+    
+
+   </body>
+</html>

@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+    <section>
+        <h2>Create a New Recipe</h2>
+        <form class="recipe_new_post" action="{{ url_for('main.new_recipe_data')}}" method="post">
+            
+            <input type="hidden" name="recipe_id" value ="{{recipe.id}}" >
+            
+            <div class = "recipe_title">
+                <label><strong>Title: </strong>{{recipe.title}} </label>
+            </div>
+            <div>
+                <label><strong>Description: </strong>{{recipe.description}} </label>
+            </div>
+            <div>
+                <label><strong>Cooking Time (minutes): </strong>{{recipe.cooking_time}} </label>
+            </div>
+            <div>
+                <label><strong>Servings: </strong> {{recipe.servings}}</label>
+            </div>
+            
+            <div class = "new_post_ingredients">
+                <label><strong>Ingredients: </strong> 
+                    <input type = 'text' name="ingredient" list="ingredients"> 
+                </label>
+            
+
+                
+                    <datalist id="ingredients">
+                    {% for ingredient in list_of_ingredients%}
+                        <option value = ingredient></option>   
+                    {%endfor%}                     
+                    </datalist>        
+                
+                <!--Amount of ingredients--> 
+                    <label><b> Amount: </b><input type="number" name="amount" required></label>
+
+                    <!--Unit of the amount-->
+                    <label for="unittype"><b> Select unit type: </b></label>
+                    <select id="unittype" name="unittype">
+                        <option value="Kg">Kg</option>
+                        <option value="gr">gr</option>
+                        <option value="Teaspoon">Teaspoon</option>
+                        <option value="Tablespoon">Tablespoon</option>
+                        <option value="Cup/s">Cup</option>
+                        <option value="Units/s">Unit</option>
+                        <option value="ml">ml</option>
+                        <option value="l">l</option>
+                    </select>
+                
+            </div>
+
+            <div class ="btngeneral">
+                <button type="submit">Add ingredient</button>
+            </div>
+            <div>
+            {% for ingredient in recipe.ingredients%}
+                    <div>
+                       <li>{{ingredient.ingredient.name}} {{ingredient.quantity}} {{ingredient.unit}}</li>
+                    </div>
+            {%endfor%}
+            </div>
+        </form>
+    
+
+        <div class="steps_form">
+            <form class = "steps_form" action="{{ url_for('main.new_step')}}" method="post">
+                <input type="hidden" name="recipe_id" value ="{{recipe.id}}" >
+                <div>
+                    <label><strong>Step:</strong></label> 
+                        <textarea name="step_description" placeholder="Write a description of the step" required></textarea>
+                </div>
+                <div class = "btngeneral">
+                    <button type="submit">Add Step</button>
+                </div>
+                <div> 
+                    {% for step in recipe.steps%}
+                        <div>
+                            {{step.sequence_number}}: {{step.description}} 
+                        </div>
+                    {%endfor%} 
+                </div>
+            </form>
+        </div>
+
+        <div class="picture">
+            <form class="picture-form" action= "{{ url_for('main.photo', recipe_id = recipe.id)}}" method="post" enctype="multipart/form-data">
+                <div><label><strong>Post a picture of your recipe:</strong></label></div>
+                <input type="file" name="photo" accept="image/jpeg,image/png" required>
+                <input type="hidden" name="recipe_id" value="{{recipe.id}}">
+
+                <div class ="btngeneral">
+                    <button type="submit">Add picture</button>
+                </div>                
+            </form>
+
+        </div>
+
+    </section>
+    
+
+    <section class="complete-delete">
+        <form class="complete-form" action="{{ url_for('main.recipe', recipe_id = recipe.id)}}" method="post">
+        <input type="hidden" name="recipe_id" value ="{{recipe.id}}" >
+            <div class ="complete">
+                <button type="submit">Complete</button>
+            </div>
+        </form>
+    
+        <form class="delete-form" action="{{ url_for('main.delete', recipe_id = recipe.id)}}" method="post">
+        <input type="hidden" name="recipe_id" value ="{{recipe.id}}" >
+            <div class=" delete">
+                <button type="submit">Delete</button>
+            </div>
+        </form>
+    </section>
+
+
+
+{% endblock %}

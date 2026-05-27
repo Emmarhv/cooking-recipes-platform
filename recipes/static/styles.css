@@ -1,0 +1,633 @@
+/* General styles */
+body {
+    font-family: 'Work Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f5f5f5;
+}
+
+header {
+    font-family: 'Work Sans', sans-serif;
+    background: #58af6d;
+    color: white;  
+}
+
+.logging {
+    font-size:large;
+    text-align: right;
+    padding-right: 15px;
+    font-weight: bold;
+}
+
+.header-middle{
+    font-size:x-large;
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+header a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+
+header a:hover {
+    color: #004D0D;
+}
+
+a:hover {
+    color: #0ead29;
+}
+
+section {
+    margin: 20px;
+    padding: 20px;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+h1 {
+    font-size: 36px;
+    color: white;
+    align-items: center;
+    
+}
+
+
+img {
+    max-width: 100px; /* Set the maximum width of the logo */
+    height: auto; /* Maintain the aspect ratio */
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+
+h2 {
+    font-size: 24px;
+    color: #004D0D;
+    display: inline-block;
+    padding: 5px 10px;
+}
+
+h3 {
+    color: #2e6b3e;
+    padding: 5px 10px;
+
+} 
+
+/* User info styles */
+.user-info img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Post form styles */
+.post-form form {
+    margin-top: 20px;
+}
+
+.post-form textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
+.post-form button {
+    padding: 10px 20px;
+    background: #0074e4;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+/* Post styles */
+.post {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+}
+
+.post .text {
+    font-size: 18px;
+}
+
+.post .metadata {
+    font-size: 16px;
+    color: #888;
+    margin-top: 10px;
+}
+
+.post button.response-btn {
+    background: #ff6600;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.post button.response-btn:hover {
+    background: #ff3300;
+}
+
+/* Recipe view */
+.general_info_recipe{
+    border-color:#004D0D
+}
+.gallery-wrap{
+    border-color:#004D0D
+}
+.steps-recipe{
+    border-color:#004D0D
+}
+.comments-recipe{
+    border-color:#004D0D
+}
+.picture-recipe{
+    border-color:#004D0D
+}
+.comment-section{
+    border-color:#004D0D
+}
+.ingredients-recipe{
+    border-color:#004D0D
+}
+
+/* User profile styles */
+.profile {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.follow-form,
+.unfollow-form {
+    display: inline-block;
+    margin-top: 15px;
+}
+
+/* Recipe and Photo sections */
+.my-recipes,
+.bookmarked-recipes,
+.following,
+.followers,
+.my-photos {
+    margin-top: 20px;
+}
+
+/* Footer styles */
+footer {
+    text-align: center;
+    margin-top: 20px;
+    padding: 10px;
+    background: #0074e4;
+    color: white;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.like-container {
+    display: flex;
+    align-items: center;
+}
+
+.like-count {
+    margin-right: 10px; /* Adjust the spacing between like count and the button */
+    font-weight: bold;
+}
+
+.cool-like-button {
+    padding: 10px 15px; /* Adjust the padding for a larger button */
+    background-color: #4CAF50; /* Green background color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Add a smooth transition effect on hover */
+}
+
+.cool-like-button:hover {
+    background-color: #45a049; /* Darker green on hover */
+}
+
+
+
+
+.photo-index {
+    /* Add any styling for the photo here */
+    width: 100%;
+    justify-content: center;
+    transition: 0.5s;
+    width: 300px; /* Set the width to your desired size */
+    height: 200px; /* Set the height to your desired size */
+    object-fit: cover;
+}
+
+.sentences{
+    text-align: center;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.recipe-card {
+    position: relative;
+}
+
+.date{
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 14px;
+    color: #777;
+}
+
+.main-recipe{
+    border-width: thin;
+    border-color: #004D0D;
+}
+
+.main-recipe:hover{
+    border-width: thin;
+    border-color: #004D0D;
+    background-color: #09811d2d;
+}
+
+summary{
+    margin-right: 10px;
+    cursor: pointer;
+    font-weight: bolder;
+    font-size: 24px;
+    color: #004D0D;
+    
+    padding: 5px 10px;
+}
+
+.recipe-form {
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #09811d2d;
+    border: 1px solid #004D0D;
+    border-radius: 8px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+textarea {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+   
+}
+
+.btngeneral button{
+    background-color: #004D0D;
+    color: white;
+    font-size: 14px;
+    margin: 4px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.delete button{
+    background-color: #ca2f2f;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    border: none;
+    margin: 4px;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+} 
+
+.delete button:hover{
+    background-color: #ff0000;
+    
+} 
+
+.complete button{
+    background-color: #029b1c;
+    font-size: 14px;
+    color: white;
+    margin: 4px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+} 
+
+.complete button:hover{
+    background-color: #17ce20;
+} 
+
+.btngeneral button:hover {
+    background-color: #45a049;
+}
+
+
+
+/* New_post */
+.new_post_ingredients {
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+    align-items: baseline; 
+} 
+
+.steps_form{
+    margin-top: 30px;
+}
+.steps_form textarea {
+    width: 50%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    background-color: #dbdbdb81;
+} 
+
+.picture{
+    margin-top: 30px;
+
+}
+
+.complete-delete{
+    border: none;
+    text-align: center;
+}
+
+/* Follow */
+.follow-input input[type="submit"] {
+    background-color: #004D0D;
+    color: rgb(255, 255, 255);
+    font-size: 14px;
+    border: none;
+    margin: 4px;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.follow-input input[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+
+
+
+/* Specific styles for different buttons */
+.like-form button,
+.dislike-form button,
+.bookmark-form button,
+.comment-section button {
+    margin-top: 10px; /* Add some spacing between buttons */
+}
+
+#rating {
+    width: 50px;
+    border: none;
+    background: none;
+    font-size: 30px;
+    margin: 0 10px;
+    pointer-events: none;
+}
+
+
+#likebtn {
+    border: none;
+    background: none;
+    font-size: 30px;
+    margin: 10px 0;
+    margin-left: 20px;
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+#dislikebtn {
+    border: none;
+    background: none;
+    font-size: 30px;
+    margin: 10px 0;
+    margin-left: 20px;
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+#personbtn {
+    border: none;
+    background: none;
+    font-size: 25px;
+    margin: 10px 0;
+    margin-left: 20px;
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+
+
+#likebtn:active {
+    color: green;
+    transform: scale(1.2);
+}
+
+#dislikebtn:active {
+    color: red;
+    transform: scale(1.2);
+}
+
+.bookmarked {
+    color: red;
+}
+
+.voting form {
+    display: inline-block; 
+    margin-right: 10px; 
+}
+
+.photos {
+    margin-bottom: 40px; /* Adjust the value as needed */
+}
+
+.recipe-container {
+    display: flex;
+    align-items: center;
+    }
+    
+
+form {
+    margin-right: 10px; /* Add some margin between the title and the form */
+}
+
+#delete_recipe {
+    border: none;
+    background: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+#save_recipe {
+    border: none;
+    background: none;
+    font-size: 30px;
+    cursor: pointer;
+}
+
+.gallery{
+    width: 700px;
+    display: flex;
+    overflow-x: scroll;
+     
+} 
+
+.gallery div{
+    width: 100%;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-gap: 20px;
+    padding: 10px;
+    justify-content: center;
+    flex:none;
+} 
+
+.gallery div img{
+    filter:grayscale(50%);
+    width: 100%;
+    justify-content: center;
+    transition: 0.5s;
+    width: 300px; /* Set the width to your desired size */
+    height: 200px; /* Set the height to your desired size */
+    object-fit: cover;
+} 
+
+.gallery::-webkit-scrollbar{
+    display:none;
+} 
+
+.gallery-wrap{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10% ;
+    overflow: hidden; 
+} 
+
+#left_arrow, #right_arrow{
+    width: 50px;
+    cursor: pointer;
+    margin: 40px;
+} 
+
+.gallery div img:hover{
+    filter:grayscale(0);
+    cursor:pointer;
+    transform: scale(1.1);
+} 
+
+.two-columns {
+    display: flex;
+    justify-content: space-between;
+}
+
+.left-column {
+    width: 60%; /* Adjust the width as needed */
+}
+
+.right-column {
+    width: 35%; /* Adjust the width as needed */
+}
+
+/* Add styles for each section in the right column */
+.my-recipes,
+.bookmarked-recipes,
+.following,
+.followers,
+.my-photos {
+    margin-top: 20px;
+}
+
+.author_name{
+    font-weight: bold;
+}
+
+.index_recipe{
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.turn{
+    text-align: center;
+}
+
+/*JAVASCRIPT-SEARCHER*/
+
+#contenedor-main {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.search-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#searcher {
+    padding: 10px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+#listRecipes {
+    list-style: none;
+    margin-top: 10px;
+    padding: 0;
+    text-align: center;
+}
+
+.recipes-list a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20px;
+    color: #333;
+}
+
+.recipes-list li {
+    margin: 5px 0;
+    
+}
+
+/* Ajuste para alinear el contenedor-main a la derecha */
+#contenedor-main {
+    margin-left: auto;
+    border:none;
+    text-align: left;
+}
+
+.filter {
+    display: none;
+}
+
+    
