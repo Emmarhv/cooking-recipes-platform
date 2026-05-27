@@ -1,52 +1,33 @@
 # Cooking Recipes Platform
 
-A full-stack web application built with **Flask** and **SQLAlchemy** that allows users to discover, share, and interact with cooking recipes.
+A full-stack web application designed for culinary enthusiasts to create, share, and discover cooking recipes. This project demonstrates backend architecture, relational database management, and secure user authentication.
 
 ## Features
 
-- **User Authentication**: Secure sign-up and login system using `Flask-Login`.
-- **Recipe Management**: Create detailed recipes including:
-  - Title, description, cooking time, and servings.
-  - Granular ingredients (amount and unit type).
-  - Step-by-step cooking instructions.
-  - Photo attachments.
-- **Social Interaction**:
-  - Follow and unfollow other chefs/users.
-  - Comment on recipes and reply to other comments.
-  - Like or dislike specific recipes.
-  - Bookmark favorite recipes to your personal profile.
-- **Search**: Integrated search API to quickly find recipes by title.
+- **User Authentication:** Secure signup, login, and session management.
+- **Recipe Management:** Users can perform CRUD (Create, Read, Update, Delete) operations on their own recipes.
+- **Social Interaction:** Browse recipes created by other users and explore a shared culinary feed.
+- **Search Functionality:** Filter and search recipes by title, ingredients, or author.
 
-## Tech Stack
-- **Backend**: Python, Flask, Flask-SQLAlchemy, Flask-Login
-- **Database**: Relational models for Users, Recipes, Ingredients, Steps, Comments, Photos, Bookmarks, and Ratings.
-- **Frontend**: HTML/CSS templating via Jinja2.
+## Tech Stack & Architecture
 
-## Structure
-The core application logic is located in the `recipes/` module, which defines the database schema in `model.py`, handles user authentication in `auth.py`, and maps application routes in `main.py`.
+- **Backend Framework:** Flask (Python) using a Blueprint architecture to cleanly separate Authentication and Main application logic.
+- **Database:** SQLAlchemy ORM interacting with a MySQL relational database.
+- **Security:** Flask-Bcrypt for password hashing and Flask-Login for secure session handling and user loading.
+- **Frontend:** HTML5, CSS3, and Jinja2 templating engine for dynamic content rendering.
 
-## 🚀 How to Run Locally
+## Project Structure
 
-To try out the Cooking Recipes Platform on your own machine, follow these steps:
+The codebase is organized into modular blueprints:
+- `/recipes/auth.py`: Handles registration, login, and password hashing logic.
+- `/recipes/main.py`: Manages the core feed, recipe creation, and search functionalities.
+- `/recipes/model.py`: Defines the SQLAlchemy database schemas for `User` and `Recipe` entities.
 
-1. **Clone the repository:**
+## How to Run
+
+1. Create a virtual environment and install the dependencies (if a requirements file is present, use `pip install -r requirements.txt`).
+2. Set the required environment variables for the database connection (`DATABASE_URL`) and application secret (`FLASK_SECRET_KEY`).
+3. Run the Flask development server:
    ```bash
-   git clone https://github.com/AlvaroMartinRuiz/Cooking_recipes_2023.git
-   cd Cooking_recipes_2023
+   flask --app recipes run --debug
    ```
-2. **Set up a virtual environment (optional but recommended):**
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows use: venv\Scripts\activate
-   ```
-3. **Install dependencies:**
-   Make sure you have Flask, SQLAlchemy, and Flask-Login installed:
-   ```bash
-   pip install Flask Flask-SQLAlchemy Flask-Login python-dateutil
-   ```
-4. **Run the Application:**
-   Because it's a Flask application built with a Blueprint structure, you can run it via:
-   ```bash
-   flask --app recipes run
-   ```
-   *The platform will be available at `http://127.0.0.1:5000`.*
